@@ -41,19 +41,20 @@ player_to_words = {
 player_to_points = {}
 
 #getting key, values in dict to use .items()
-for player, words in player_to_words.items():
-    player_points = 0
-    for word in words:
-        player_points += score_word(word)
-    player_to_points[player] = player_points
-
-print(player_to_points)
+def update_point_totals():
+    for player, words in player_to_words.items():
+        player_points = 0
+        for word in words:
+            player_points += score_word(word)
+        player_to_points[player] = player_points
 
 def play_word(player, word):
-    if player in player_to_words.keys():
-        player_to_words[player] += [word]
-    return player_to_words
+    player_to_words[player] += [word]
+    update_point_totals()
 
-
+# play new word
 play_word("player1", "HOLY")
+
+#test if the words appear
 print(player_to_words)
+print(player_to_points)
